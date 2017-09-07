@@ -1,0 +1,29 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "5000:5000"
+    depends_on:
+      - redis
+  worker:
+    build:
+      context: ./queue
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+  monitor:
+    build:
+      context: ./queue
+      dockerfile: Dockerfile
+    ports:
+     - "5555:5555"
+    entrypoint: flower
+    command:  -A tasks --port=5555 --broker=redis://redis:6379/0
+    depends_on:
+      - redis
+  redis:
+    image: redis
