@@ -17,6 +17,7 @@ RUN pip install -r requirements.txt
 # expose the app port
 EXPOSE 5000
 
+RUN pip install gunicorn
+
 # run the app server
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "3", "app:app"]
