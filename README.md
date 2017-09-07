@@ -23,7 +23,7 @@ docker-compose scale worker=5
 
 If you would like to change the endpoints, update the code in [api/app.py](api/app.py)
 
-Task changes should happen in [queue/tasks.py](queue/tasks.py) 
+Task changes should happen in [queue/tasks.py](celery-queue/tasks.py) 
 
 ---
 
