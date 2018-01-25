@@ -21,6 +21,12 @@ To add more workers:
 docker-compose up -d --scale worker=5 --no-recreate
 ```
 
+To shut down:
+
+```bash
+docker-compose down
+```
+
 If you would like to change the endpoints, update the code in [api/app.py](api/app.py)
 
 Task changes should happen in [queue/tasks.py](celery-queue/tasks.py) 
