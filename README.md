@@ -18,7 +18,7 @@ This will expose the Flask application's endpoints on port `5000` as well as a f
 
 To add more workers:
 ```bash
-docker-compose scale worker=5
+docker-compose up -d --scale worker=5 --no-recreate
 ```
 
 If you would like to change the endpoints, update the code in [api/app.py](api/app.py)
