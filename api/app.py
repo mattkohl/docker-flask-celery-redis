@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask import url_for
 from worker import celery
