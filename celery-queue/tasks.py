@@ -10,6 +10,6 @@ celery = Celery('tasks', broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND
 
 
 @celery.task(name='tasks.add')
-def add(x, y):
+def add(x: int, y: int) -> int:
     time.sleep(5)
     return x + y

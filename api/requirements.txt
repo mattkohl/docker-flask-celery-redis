@@ -1,7 +1,7 @@
 amqp==2.2.2
 Babel==2.5.3
 billiard==3.5.0.3
-celery==4.2.0rc4
+celery==4.2.1
 click==6.7
 Flask==1.0.2
 itsdangerous==0.24

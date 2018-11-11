@@ -14,7 +14,7 @@ git clone https://github.com/mattkohl/docker-flask-celery-redis
 docker-compose up -d --build
 ```
 
-This will expose the Flask application's endpoints on port `5000` as well as a flower server for monitoring workers on port `5555`
+This will expose the Flask application's endpoints on port `5001` as well as a flower server for monitoring workers on port `5555`
 
 To add more workers:
 ```bash

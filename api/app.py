@@ -7,15 +7,14 @@ app = Flask(__name__)
 
 
 @app.route('/add/<int:param1>/<int:param2>')
-def add(param1: int, param2: int):
+def add(param1: int, param2: int) -> str:
     task = celery.send_task('tasks.add', args=[param1, param2], kwargs={})
-    response = "<a href='{url}'>check status of {id} </a>".format(id=task.id,
-                                                                  url=url_for('check_task', task_id=task.id, external=True))
+    response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
     return response
 
 
 @app.route('/check/<string:task_id>')
-def check_task(task_id: str):
+def check_task(task_id: str) -> str:
     res = celery.AsyncResult(task_id)
     if res.state == states.PENDING:
         return res.state

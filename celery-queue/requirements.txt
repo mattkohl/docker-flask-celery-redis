@@ -1,7 +1,7 @@
 amqp==2.2.2
 Babel==2.5.3
 billiard==3.5.0.3
-celery==4.2.0rc4
+celery==4.2.1
 flower==0.9.2
 kombu==4.2.0
 pytz==2018.3
