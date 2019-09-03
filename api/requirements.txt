@@ -12,4 +12,4 @@ pytz==2018.3
 redis==2.10.6
 tornado==5.0.2
 vine==1.1.4
-Werkzeug==0.14.1
+Werkzeug==0.15.3
