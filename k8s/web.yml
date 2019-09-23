@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: celery-web
+  name: celery-web
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: celery-web
+    spec:
+      containers:
+      - image: teochenglim/celery-api
+        env:
+        - name: CELERY_BROKER_URL
+          value: "redis://celery-redis.default.svc.cluster.local:6379/0"
+        - name: CELERY_RESULT_BACKEND
+          value: "redis://celery-redis.default.svc.cluster.local:6379/0"
+        name: web
+        ports:
+        - containerPort: 5001
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: celery-web
+  name: celery-web
+spec:
+  ports:
+  - name: "web"
+    port: 5001
+    targetPort: 5001
+    protocol: TCP
+    nodePort: 30011
+  selector:
+    app: celery-web
+  type: NodePort
