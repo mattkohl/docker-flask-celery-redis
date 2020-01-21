@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import url_for
+from flask import url_for, jsonify
 from worker import celery
 import celery.states as states
 
@@ -26,6 +26,10 @@ def check_task(task_id: str) -> str:
         return res.state
     else:
         return str(res.result)
+
+@app.route('/health_check')
+def health_check() -> str:
+        return jsonify("OK")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5001')
