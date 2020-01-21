@@ -25,7 +25,7 @@ def check_task(task_id: str) -> str:
     if res.state == states.PENDING:
         return res.state
     else:
-        return str(res.result)
+        return jsonify(res.result)
 
 @app.route('/health_check')
 def health_check() -> str:
