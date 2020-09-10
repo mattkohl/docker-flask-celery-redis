@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+     - "5001:5001"
+    depends_on:
+      - redis
+    # volumes line used for hot code reloading
+    volumes: ['./api:/api']
+  worker:
+    build:
+      context: celery-queue
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    volumes: ['./celery-queue:/queue']
+  monitor:
+    build:
+      context: celery-queue
+      dockerfile: Dockerfile
+    ports:
+     - "5555:5555"
+    entrypoint: flower
+    command:  -A tasks --port=5555 --broker=redis://redis:6379/0
+    depends_on:
+      - redis
+    volumes: ['./celery-queue:/queue']
+  redis:
+    image: redis
