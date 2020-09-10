@@ -12,6 +12,7 @@ app.config.update(
     THREADED=False
 )
 
+
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
     task = celery.send_task('tasks.add', args=[param1, param2], kwargs={})
@@ -27,9 +28,11 @@ def check_task(task_id: str) -> str:
     else:
         return str(res.result)
 
+
 @app.route('/health_check')
 def health_check() -> str:
         return jsonify("OK")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5001')
