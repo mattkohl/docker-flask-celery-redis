@@ -6,6 +6,4 @@ services:
 script:
    - docker-compose up -d --build
    - docker-compose stop
-   - docker-compose -f docker-compose.yml -f docker-compose.development.yml up --build
-   - docker-compose stop
 
