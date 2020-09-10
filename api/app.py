@@ -1,7 +1,7 @@
+import celery.states as states
 from flask import Flask
 from flask import url_for, jsonify
 from worker import celery
-import celery.states as states
 
 dev_mode = True
 app = Flask(__name__)
