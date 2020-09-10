@@ -13,15 +13,15 @@ services:
     volumes: ['./api:/api']
   worker:
     build:
-      context: celery-queue
-      dockerfile: celery-queue/Dockerfile.dev
+      context: ./celery-queue
+      dockerfile: Dockerfile.dev
     depends_on:
       - redis
     volumes: ['./celery-queue:/queue']
   monitor:
     build:
-      context: celery-queue
-      dockerfile: celery-queue/Dockerfile.dev
+      context: ./celery-queue
+      dockerfile: Dockerfile.dev
     ports:
      - "5555:5555"
     entrypoint: flower
