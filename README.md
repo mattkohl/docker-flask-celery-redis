@@ -1,4 +1,6 @@
-# Docker Flask Celery Redis
+[![Build Status](https://travis-ci.org/dlesz/docker-flask-celery-redis-hotcode.svg?branch=master)](https://travis-ci.org/dlesz/docker-flask-celery-redis-hotcode)
+
+# Docker Flask Celery Redis + Hot code reloading for development purpose
 
 A basic [Docker Compose](https://docs.docker.com/compose/) template for orchestrating a [Flask](http://flask.pocoo.org/) application & a [Celery](http://www.celeryproject.org/) queue with [Redis](https://redis.io/)
 
@@ -14,6 +16,12 @@ git clone https://github.com/mattkohl/docker-flask-celery-redis
 docker-compose up -d --build
 ```
 
+### Hot code reloading - development mode
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.development.yml up --build
+```
+
 This will expose the Flask application's endpoints on port `5001` as well as a [Flower](https://github.com/mher/flower) server for monitoring workers on port `5555`
 
 To add more workers:
@@ -26,6 +34,7 @@ To shut down:
 ```bash
 docker-compose down
 ```
+
 
 To change the endpoints, update the code in [api/app.py](api/app.py)
 
