@@ -18,6 +18,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5001
 
 # run the flask development server
-ENTRYPOINT [ "python" ]
-
-CMD [ "app.py" ]
+CMD [ "flask", "run", "--host=0.0.0.0", "--port=5001"]

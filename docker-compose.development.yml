@@ -4,10 +4,6 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile.dev
-    entrypoint:
-      - flask
-      - run
-      - --host=0.0.0.0
     environment:
       FLASK_DEBUG: "on"
       FLASK_APP: ./app.py
