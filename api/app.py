@@ -5,13 +5,6 @@ from worker import celery
 
 dev_mode = True
 app = Flask(__name__)
-app.config.update(
-    TESTING=dev_mode,
-    DEBUG=dev_mode,
-    USE_RELOADER=dev_mode,
-    THREADED=False
-)
-
 
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
