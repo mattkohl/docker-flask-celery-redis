@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: celery-monitor
+  name: celery-monitor
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: celery-monitor
+    spec:
+      containers:
+      - name: monitor
+        env:
+        - name: CELERY_BROKER_URL
+          value: "redis://celery-redis.default.svc.cluster.local:6379/0"
+        - name: CELERY_RESULT_BACKEND
+          value: "redis://celery-redis.default.svc.cluster.local:6379/0"
+        args:
+        - -A
+        - tasks
+        - --port=5555
+        - --broker=redis://celery-redis.default.svc.cluster.local:6379/0
+        command:
+        - flower
+        image: teochenglim/celery-monitor
+        ports:
+        - containerPort: 5555
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: celery-monitor
+  name: celery-monitor
+spec:
+  ports:
+  - name: "monitor"
+    port: 5555
+    targetPort: 5555
+    protocol: TCP
+    nodePort: 30010
+  selector:
+    app: celery-monitor
+  type: NodePort

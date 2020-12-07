@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: celery-redis
+  name: celery-redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: celery-redis
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        resources: {}
+        ports:
+        - containerPort: 6379
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: celery-redis
+  name: celery-redis
+spec:
+  ports:
+  - name: "redis"
+    port: 6379
+    targetPort: 6379
+  selector:
+    app: celery-redis
