@@ -6,6 +6,7 @@ from worker import celery
 dev_mode = True
 app = Flask(__name__)
 
+
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
     task = celery.send_task('tasks.add', args=[param1, param2], kwargs={})
@@ -24,7 +25,7 @@ def check_task(task_id: str) -> str:
 
 @app.route('/health_check')
 def health_check() -> str:
-        return jsonify("OK")
+    return jsonify("OK")
 
 
 if __name__ == '__main__':
