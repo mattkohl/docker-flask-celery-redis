@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/dlesz/docker-flask-celery-redis-hotcode.svg?branch=master)](https://travis-ci.org/dlesz/docker-flask-celery-redis-hotcode)
-
 # Docker Flask Celery Redis
 
 A basic [Docker Compose](https://docs.docker.com/compose/) template for orchestrating a [Flask](http://flask.pocoo.org/) application & a [Celery](http://www.celeryproject.org/) queue with [Redis](https://redis.io/)

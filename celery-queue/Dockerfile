@@ -7,7 +7,5 @@ ENV C_FORCE_ROOT true
 COPY . /queue
 WORKDIR /queue
 
+RUN pip install -U setuptools pip
 RUN pip install -r requirements.txt
-
-# production
-ENTRYPOINT celery -A tasks worker --loglevel=info

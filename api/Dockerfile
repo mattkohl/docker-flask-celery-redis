@@ -11,13 +11,11 @@ ENV DEBUG true
 COPY . /api
 WORKDIR /api
 
-# install requirements
+RUN pip install -U setuptools pip
 RUN pip install -r requirements.txt
 
-# expose the app port
 EXPOSE 5001
 
 RUN pip install gunicorn
 
-# run the app server in production with gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:5001", "--workers", "3", "app:app"]

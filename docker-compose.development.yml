@@ -12,12 +12,15 @@ services:
      - "5001:5001"
     depends_on:
       - redis
-    # volumes line used for hot code reloading
     volumes: ['./api:/api']
   worker:
     build:
       context: ./celery-queue
       dockerfile: Dockerfile.dev
+    command: celery -A tasks worker -l info -E
+    environment:
+      CELERY_BROKER_URL: redis://redis
+      CELERY_RESULT_BACKEND: redis://redis
     depends_on:
       - redis
     volumes: ['./celery-queue:/queue']
@@ -27,10 +30,15 @@ services:
       dockerfile: Dockerfile.dev
     ports:
      - "5555:5555"
-    entrypoint: flower
-    command:  -A tasks --port=5555 --broker=redis://redis:6379/0
+    command:  ['celery', 'flower', '-A', 'tasks']
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
     depends_on:
       - redis
+      - worker
     volumes: ['./celery-queue:/queue']
   redis:
-    image: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
