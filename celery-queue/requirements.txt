@@ -1,5 +1,5 @@
 celery==5.1.2
-flower==1.0.0
+flower==1.2.0
 redis==3.5.3
 watchdog==2.1.5
 
