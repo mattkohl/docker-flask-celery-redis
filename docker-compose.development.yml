@@ -17,7 +17,7 @@ services:
     build:
       context: ./celery-queue
       dockerfile: Dockerfile.dev
-    command: celery -A tasks worker -l info -E
+    command: celery -A tasks worker -l info --uid=nobody --gid=nogroup -E
     environment:
       CELERY_BROKER_URL: redis://redis
       CELERY_RESULT_BACKEND: redis://redis
@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile.dev
     ports:
      - "5555:5555"
-    command:  ['celery', 'flower', '-A', 'tasks']
+    command:  ['celery', '-A', 'tasks', 'flower']
     environment:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
