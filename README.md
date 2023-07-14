@@ -38,6 +38,17 @@ To change the endpoints, update the code in [api/app.py](api/app.py)
 
 Task changes should happen in [celery-queue/tasks.py](celery-queue/tasks.py) 
 
+
+### Setup considerations
+
+From: [Redis administration](https://redis.io/docs/management/admin/)
+
+```
+Make sure to set Linux kernel overcommit memory setting to 1.
+
+This can be done by adding **vm.overcommit_memory=1** to **/etc/sysctl.conf**. Then, reboot or run the command **sysctl vm.overcommit_memory=1** to activate the setting.
+```
+
 ---
 
 adapted from [https://github.com/itsrifat/flask-celery-docker-scale](https://github.com/itsrifat/flask-celery-docker-scale)
